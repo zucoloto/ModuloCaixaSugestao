@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
+<!-- 2015-07-21T16:34:39 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioMensagemPorPeriodo" pageWidth="595" pageHeight="842" columnWidth="515" leftMargin="50" rightMargin="30" topMargin="20" bottomMargin="20" uuid="f71edf34-d738-4460-8936-39deece837cc">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CCOMSEx"/>
+	<parameter name="data_inicio" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="data_fim" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     flc_assunto.`assunto` AS flc_assunto_assunto,
+     flc_mensagem.`id` AS flc_mensagem_id,
+     flc_mensagem.`data_hora_registro` AS flc_mensagem_data_hora_registro,
+     flc_mensagem.`mensagem` AS flc_mensagem_mensagem
+FROM
+     `flc_assunto` flc_assunto INNER JOIN `flc_mensagem` flc_mensagem ON flc_assunto.`id` = flc_mensagem.`assunto_id`
+WHERE
+     CAST(flc_mensagem.`data_hora_registro`AS DATE)
+     BETWEEN $P{data_inicio} AND $P{data_fim}
+ORDER BY
+     flc_mensagem.`data_hora_registro` ASC]]>
+	</queryString>
+	<field name="flc_assunto_assunto" class="java.lang.String"/>
+	<field name="flc_mensagem_id" class="java.lang.Long"/>
+	<field name="flc_mensagem_data_hora_registro" class="java.sql.Timestamp"/>
+	<field name="flc_mensagem_mensagem" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="89" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="9" width="271" height="20" uuid="a48c3d78-db48-4579-9c71-838455d9b490"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<text><![CDATA[Exército Brasileiro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="27" width="513" height="29" uuid="2ba09ed9-c30a-43d3-89d1-b528e6403cd6"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Centro de Comunicação Social do Exército]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="56" width="291" height="20" uuid="7e2cbadb-24f0-44a2-bf98-d815b92db715"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<text><![CDATA[MÓDULO - CAIXA DE SUGESTÃO]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="168">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="1" y="132" width="513" height="24" isRemoveLineWhenBlank="true" uuid="8210525e-5073-411c-bfba-cdda34360f30"/>
+				<textElement textAlignment="Justified" markup="none">
+					<font size="12" isStrikeThrough="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{flc_mensagem_mensagem}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="102" width="100" height="20" uuid="9c7e15b3-f97e-42c8-9de4-cd0f2b534039"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[MENSAGEM :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="42" width="110" height="20" uuid="b0258de5-065f-4749-8d1d-a0dd75705d15"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[DATA / HORA :]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy - HH:mm:ss">
+				<reportElement x="111" y="42" width="249" height="20" uuid="48ca478b-2095-4509-8c5b-5979d53927c0"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{flc_mensagem_data_hora_registro}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="72" width="86" height="20" uuid="b95e6b17-1aeb-4845-8c4f-8b18a66aaab1"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[ASSUNTO :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="87" y="72" width="249" height="20" uuid="1adfd769-5225-4c37-af62-e2f2aae49d79"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{flc_assunto_assunto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="184" y="11" width="144" height="20" uuid="0e6440b1-3903-41ea-82e5-50f055acb5ae"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{flc_mensagem_id}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="11" width="183" height="20" uuid="ffe5310c-942a-481c-8ea6-3c589876a9b5"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[MENSAGEM INTERNA Nº :]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="515" height="1" uuid="921124ef-48ea-4546-81b2-f1d1a82e8fbf"/>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="40" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="515" height="1" uuid="d5acd1c5-5250-41d6-8880-dc165f798447"/>
+			</line>
+			<textField>
+				<reportElement x="393" y="13" width="80" height="20" uuid="0101cfe6-8dce-4278-9ce3-7542fc39e554"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="475" y="13" width="40" height="20" uuid="d2c2095c-78f2-4c3d-867f-a58040236136"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE, dd MMMMM yyyy">
+				<reportElement x="12" y="13" width="321" height="20" uuid="01aeb860-467d-403e-b434-8373bce5e691"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

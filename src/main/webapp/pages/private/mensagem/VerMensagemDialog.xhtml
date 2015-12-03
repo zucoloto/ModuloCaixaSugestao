@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+<h:head>
+	<meta charset="UTF-8" />
+	<title><ui:insert name="titulo">Leitura da Mensagem</ui:insert></title>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+
+<h:body>
+	<p:dialog widgetVar="verMensagem" height="100%" width="500"
+		modal="true" closable="true" resizable="false"
+		style="font-size: 14px;" position="top">
+
+		<h:form id="verForm" prependId="false">
+
+			<h3>Mensagem número: #{cadastrarMensagemBean.mensagem.id}</h3>
+
+			<h:panelGroup id="mensagem">
+
+				<h:panelGrid columns="2" styleClass="grid-login">
+
+					<p:outputLabel value="Data/Hora:" style="font-weight: bold;" />
+					<h:outputText
+						value="#{cadastrarMensagemBean.mensagem.dataHoraRegistro}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+					</h:outputText>
+
+					<p:outputLabel value="Assunto:" style="font-weight: bold;" />
+					<h:outputText
+						value="#{cadastrarMensagemBean.mensagem.assunto.assunto}" />
+
+				</h:panelGrid>
+
+				<h:panelGrid styleClass="grid-login">
+					<p:outputLabel value="Mensagem:" style="font-weight: bold;" />
+					<h:outputText value="#{cadastrarMensagemBean.mensagem.mensagem}" />
+				</h:panelGrid>
+
+				<br />
+
+				<p:commandButton value="Fechar" icon="ui-icon-cancel"
+					onclick="PF('verMensagem').hide();" type="button" />
+
+			</h:panelGroup>
+
+		</h:form>
+
+	</p:dialog>
+
+</h:body>
+
+</html>
